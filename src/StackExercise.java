@@ -12,27 +12,37 @@ public class StackExercise {
 
     }
 
-    public static void ValidParenthesisString () {
+    public static void ValidParenthesisString() {
         Scanner sc = new Scanner(System.in);
         int cnt = 0;
-         String ps = sc.next();
-         for (int i= 0; i < ps.length(); i++){
-            if(ps.charAt(i) == '(') {
-                cnt ++;
-            } else {
-                cnt --;
-                if(cnt < 0 ) {
-                    System.out.println("No");
+        int testCase = sc.nextInt();
+        for (int n = 0; n < testCase; n++) {
+            String ps = sc.next();
+            for (int i = 0; i < ps.length(); i++) {
+                if (ps.charAt(i) == '(') {
+                    cnt++;
+                } else {
+                    cnt--;
+                    if (cnt < 0) {
+                        System.out.println("No");
+                    }
                 }
             }
-         }
 
-         if (cnt == 0) {
-             System.out.println("Yes");
-         } else {
-             System.out.println("No");
-         }
+            if (cnt == 0) {
+                System.out.println("Yes");
+            } else {
+                System.out.println("No");
+            }
+        }
+
+        sc.close();
     }
 
 
+
+
 }
+//2
+//        ()
+//        ())
