@@ -1,37 +1,38 @@
-import java.util.Stack;
+import java.util.Scanner;
 
 public class StackExercise {
 
     public static void main(String[] args) {
-        Stack<Integer> stack = new Stack<>();
-
-        // Push
-        stack.push(5);
-        stack.push(4);
-        stack.push(3);
-        stack.push(2);
-        stack.push(1);
-
-        // Print
-        System.out.println("LIFO");
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-
-        System.out.println("Size: "+ stack.size());    // Size
-
-        System.out.println("---------------");
-
-        // Push
-        stack.push(5);
-        stack.push(4);
-
-
-        System.out.println(stack.size());    // Size
-        System.out.println(stack.peek());    // Top
-        System.out.println(stack.size());    // Size Recheck
+//        Stack<Integer> stack = new Stack<>();
+//        stack.push(1);
+//        System.out.println(stack.pop());
+//        System.out.println(stack.peek());
+//        System.out.println(stack.size());
+        ValidParenthesisString();
 
     }
+
+    public static void ValidParenthesisString () {
+        Scanner sc = new Scanner(System.in);
+        int cnt = 0;
+         String ps = sc.next();
+         for (int i= 0; i < ps.length(); i++){
+            if(ps.charAt(i) == '(') {
+                cnt ++;
+            } else {
+                cnt --;
+                if(cnt < 0 ) {
+                    System.out.println("No");
+                }
+            }
+         }
+
+         if (cnt == 0) {
+             System.out.println("Yes");
+         } else {
+             System.out.println("No");
+         }
+    }
+
+
 }
