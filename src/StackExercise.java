@@ -4,7 +4,8 @@ import java.util.Stack;
 public class StackExercise {
     public static void main(String[] args) {
 //        ValidParethesisString();
-        LaserPipe();
+//        LaserPipe();
+        Editor();
     }
 
 //9012
@@ -62,7 +63,59 @@ public class StackExercise {
         System.out.println(answer);
     }
 
+    public static void Editor() {
+        Scanner sc = new Scanner(System.in);
+        String givenString = sc.next();
+        Stack<Character> rightStack = new Stack<>();
+        Stack<Character> leftStack = new Stack<>();
+        String answer = "";
+        for (int i = 0; i < givenString.length(); i++) {
+            leftStack.push(givenString.charAt(i));
+        }
+        int iteration = sc.nextInt();
 
+        while (true) {
+            iteration--;
+            String cmd = sc.next();
+            if (cmd.equals("L")) {
+                if (!leftStack.empty()) {
+                    rightStack.push(leftStack.peek());
+                    leftStack.pop();
+                }
+            } else if (cmd.equals("D")) {
+                if (!rightStack.empty()) {
+                    leftStack.push(rightStack.peek());
+                    rightStack.pop();
+                }
+            } else if (cmd.equals("B")) {
+                if (!leftStack.empty()) {
+                    leftStack.pop();
+                }
+            } else if (cmd.equals("P")) {
+                char input = sc.next().charAt(0);
+                leftStack.push(input);
+            }
+            System.out.println(leftStack);
+            System.out.println(rightStack);
+
+            if(iteration< 1) {
+                break;
+            }
+        }
+
+        for (int j = 0; !leftStack.empty(); j++) {
+            System.out.println(leftStack.peek());
+            rightStack.push(leftStack.peek());
+            leftStack.pop();
+        }
+
+
+        for (int k = 0; !rightStack.empty(); k++) {
+            answer+= rightStack.pop();
+        }
+
+        System.out.println(answer);
+    }
 }
 
 
