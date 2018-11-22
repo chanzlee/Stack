@@ -1,10 +1,13 @@
 import java.util.Scanner;
+import java.util.Stack;
+
 public class StackExercise {
     public static void main(String[] args) {
-        ValidParethesisString();
+//        ValidParethesisString();
+        LaserPipe();
     }
 
-
+//9012
     public static void ValidParethesisString() {
         Scanner sc = new Scanner(System.in);
 
@@ -34,6 +37,32 @@ public class StackExercise {
             return "NO";
         }
     }
+
+    //10799
+    public static void LaserPipe () {
+        Scanner sc = new Scanner(System.in);
+        Stack<Integer> stack = new Stack<>();
+        int answer = 0;
+        String ps = sc.next();
+        for (int i = 0; i < ps.length(); i++) {
+            if (ps.charAt(i) == '(') {
+                stack.push(i);
+            } else {
+                if ( i - stack.peek() == 1 ) {
+                    stack.pop();
+                    answer += stack.size();
+                } else {
+                    stack.pop();
+                    answer ++;
+                }
+
+            }
+        }
+
+        System.out.println(answer);
+    }
+
+
 }
 
 
