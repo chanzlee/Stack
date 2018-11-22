@@ -1,8 +1,11 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class StackExercise {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NumberFormatException, IOException {
 //        ValidParethesisString();
 //        LaserPipe();
         Editor();
@@ -63,55 +66,55 @@ public class StackExercise {
         System.out.println(answer);
     }
 
-    public static void Editor() {
-        Scanner sc = new Scanner(System.in);
-        String givenString = sc.next();
+    public static void Editor() throws NumberFormatException, IOException {
+//        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        String givenString = sc.next();
+        String givenString = br.readLine();
         Stack<Character> rightStack = new Stack<>();
         Stack<Character> leftStack = new Stack<>();
-        String answer = "";
+//
+//
         for (int i = 0; i < givenString.length(); i++) {
             leftStack.push(givenString.charAt(i));
         }
-        int iteration = sc.nextInt();
 
-        while (true) {
-            iteration--;
-            String cmd = sc.next();
+//        int iteration = sc.nextInt();
+        int iteration = Integer.parseInt(br.readLine());
+
+        while (iteration-- > 0) {
+            String[] line = br.readLine().split(" ");
+//            String cmd = sc.next();
+            String cmd = line[0];
             if (cmd.equals("L")) {
                 if (!leftStack.empty()) {
-                    rightStack.push(leftStack.peek());
-                    leftStack.pop();
+                    rightStack.push(leftStack.pop());
+
                 }
             } else if (cmd.equals("D")) {
                 if (!rightStack.empty()) {
-                    leftStack.push(rightStack.peek());
-                    rightStack.pop();
+                    leftStack.push(rightStack.pop());
+
                 }
             } else if (cmd.equals("B")) {
                 if (!leftStack.empty()) {
                     leftStack.pop();
                 }
             } else if (cmd.equals("P")) {
-                char input = sc.next().charAt(0);
+                char input = line[1].charAt(0);
                 leftStack.push(input);
             }
-            System.out.println(leftStack);
-            System.out.println(rightStack);
 
-            if(iteration< 1) {
-                break;
-            }
         }
 
-        for (int j = 0; !leftStack.empty(); j++) {
-            System.out.println(leftStack.peek());
-            rightStack.push(leftStack.peek());
-            leftStack.pop();
+        while (!leftStack.empty()) {
+            rightStack.push(leftStack.pop());
         }
 
+        StringBuffer answer = new StringBuffer();
 
-        for (int k = 0; !rightStack.empty(); k++) {
-            answer+= rightStack.pop();
+        while (!rightStack.empty()) {
+            answer.append(rightStack.pop());
         }
 
         System.out.println(answer);
